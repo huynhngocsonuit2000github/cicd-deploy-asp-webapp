@@ -20,11 +20,11 @@ jobs:
                 dotnnet-version: '7.0.x'
 
             - name: Restore
-              run: dotnet restore ./cicd-deploy-asp-webapp.sln
+              run: dotnet restore ./cicd-deploy-asp-webapp.csproj
 
             - name: Build at Release mode
-              run: dotnet build ./cicd-deploy-asp-webapp.sln --configuration Release --bo-restore
+              run: dotnet build ./cicd-deploy-asp-webapp.csproj --configuration Release --no-restore
 
             - name: Publish
-              run: dotnet publish ./cicd-deploy-asp-webapp.sln --configuration Release --bo-build
+              run: dotnet publish ./cicd-deploy-asp-webapp.csproj --configuration Release --no-build
             
