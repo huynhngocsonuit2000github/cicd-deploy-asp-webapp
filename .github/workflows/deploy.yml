@@ -1,0 +1,30 @@
+name: Publish Demo 🚀 💗
+
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+    
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+            
+            - name: Setup .Net environment with specific version
+              uses: actions/setup-dotnet@v3
+              with:
+                dotnnet-version: '7.0.x'
+
+            - name: Restore
+              run: dotnet restore ./cicd-deploy-asp-webapp.sln
+
+            - name: Build at Release mode
+              run: dotnet build ./cicd-deploy-asp-webapp.sln --configuration Release --bo-restore
+
+            - name: Publish
+              run: dotnet publish ./cicd-deploy-asp-webapp.sln --configuration Release --bo-build
+            
